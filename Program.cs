@@ -1,6 +1,4 @@
 using AdminPageMVC.Data;
-using AdminPageMVC.Interfaces;
-using AdminPageMVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +7,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>();
 
-builder.Services.AddScoped<IUserRepsoitory, UserService>();
-builder.Services.AddScoped<ICourseRepository, CourseService>();
 
 
 var app = builder.Build();

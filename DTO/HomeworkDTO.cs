@@ -1,4 +1,7 @@
-﻿namespace AdminPageMVC.DTO
+﻿using Task = AdminPageMVC.Entities.Task;
+namespace AdminPageMVC.DTO
+
+
 {
     public class HomeworkDTO
     {

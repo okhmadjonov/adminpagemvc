@@ -21,8 +21,60 @@
       "PackagePath": "staticwebassets\\assets\\demo\\datatables-demo.js"
     },
     {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\AppointmentPix.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\AppointmentPix.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\HomePix.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\HomePix.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\admin.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\admin.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\appoint.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\appoint.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\bg-login3.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\bg-login3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\bg_1.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\bg_1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\bg_2.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\bg_2.jpg"
+    },
+    {
       "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\error-404-monochrome.svg",
       "PackagePath": "staticwebassets\\assets\\img\\error-404-monochrome.svg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\log.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\log.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\patients\\1.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\patients\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\patients\\2.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\patients\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\patients\\3.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\patients\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\reg.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\reg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\user.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\user.jpg"
     },
     {
       "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\css\\site.css",

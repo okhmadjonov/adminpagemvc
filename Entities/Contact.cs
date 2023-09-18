@@ -7,6 +7,6 @@
 
         public string? PhoneNumber { get; set; }
 
-        public DateTimeOffset DateTime { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }

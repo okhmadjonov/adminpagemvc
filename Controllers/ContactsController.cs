@@ -1,44 +1,24 @@
-﻿using AdminPageMVC.Data;
+﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.Entities;
+using AdminPageMVC.OnlyModelViews;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AdminPageMVC.Controllers
 {
     public class ContactsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IContactRepository _contactRepository;
 
-        public ContactsController(AppDbContext context)
-        {
-            _context = context;
-        }
+        public ContactsController(IContactRepository contactRepository) => _contactRepository = contactRepository;
 
         // GET: Contacts
         public async Task<IActionResult> Index()
         {
-            return _context.Contacts != null ?
-                        View(await _context.Contacts.ToListAsync()) :
-                        Problem("Entity set 'AppDbContext.Contacts'  is null.");
+            var allContacts = await _contactRepository.GetAll();
+            return View(allContacts);
         }
 
-        // GET: Contacts/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Contacts == null)
-            {
-                return NotFound();
-            }
 
-            var contact = await _context.Contacts
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (contact == null)
-            {
-                return NotFound();
-            }
-
-            return View(contact);
-        }
 
         // GET: Contacts/Create
         public IActionResult Create()
@@ -46,32 +26,30 @@ namespace AdminPageMVC.Controllers
             return View();
         }
 
-        // POST: Contacts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,PhoneNumber,DateTime")] Contact contact)
+
+        public async Task<IActionResult> Create(ContactDto contactDto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View();
+            var addContact = new Contact()
             {
-                contact.DateTime.ToShortDateString();
-                _context.Add(contact);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(contact);
+                Name = contactDto.name,
+                PhoneNumber = contactDto.phoneNumber,
+                DateTime = DateTime.UtcNow,
+            };
+
+            await _contactRepository.AddContact(addContact);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Contacts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Contacts == null)
+            if (id == null)
             {
                 return NotFound();
             }
-
-            var contact = await _context.Contacts.FindAsync(id);
+            var contact = await _contactRepository.GetAll();
             if (contact == null)
             {
                 return NotFound();
@@ -79,11 +57,8 @@ namespace AdminPageMVC.Controllers
             return View(contact);
         }
 
-        // POST: Contacts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,PhoneNumber,DateTime")] Contact contact)
         {
             if (id != contact.Id)
@@ -93,37 +68,24 @@ namespace AdminPageMVC.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(contact);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ContactExists(contact.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
+                await _contactRepository.AddContact(contact);
+
+
                 return RedirectToAction(nameof(Index));
             }
             return View(contact);
         }
 
         // GET: Contacts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Contacts == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var contact = await _context.Contacts
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var contact = await _contactRepository.GetAll();
             if (contact == null)
             {
                 return NotFound();
@@ -137,23 +99,19 @@ namespace AdminPageMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Contacts == null)
+            if (_contactRepository.GetAll == null)
             {
                 return Problem("Entity set 'AppDbContext.Contacts'  is null.");
             }
-            var contact = await _context.Contacts.FindAsync(id);
-            if (contact != null)
+            // var contact = await _context.Contacts.FindAsync(id);
+            if (id != null)
             {
-                _context.Contacts.Remove(contact);
+                await _contactRepository.Delete(id);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ContactExists(int id)
-        {
-            return (_context.Contacts?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+
     }
 }

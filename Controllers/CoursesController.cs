@@ -1,7 +1,7 @@
-﻿using AdminPageinMVC.OnlyModelViews;
-using AdminPageinMVC.Repository;
+﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.DTO;
 using AdminPageMVC.Entities;
+using AdminPageMVC.OnlyModelViews;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPageMVC.Controllers

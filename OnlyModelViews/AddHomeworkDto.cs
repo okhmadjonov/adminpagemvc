@@ -1,7 +1,9 @@
 ﻿namespace AdminPageMVC.OnlyModelViews;
-public class AddCourseDto
+public class AddHomeworkDto
 {
     public string? ImageUrl { get; set; }
+
     public string? Description { get; set; }
-    public double Price { get; set; }
+
+    public int TaskId { get; set; }
 }

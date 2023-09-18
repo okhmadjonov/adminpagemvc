@@ -32,7 +32,7 @@ namespace AdminPageMVC.Controllers
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            if (id == null || UserRepository.GetAllUsersAsync() == null)
+            if (id == null)
             {
                 return NotFound();
             }

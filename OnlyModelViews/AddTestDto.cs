@@ -1,9 +1,10 @@
-﻿namespace AdminPageMVC.OnlyModelViews
+﻿
+namespace AdminPageMVC.OnlyModelViews;
+
+public class AddTestDto
 {
-    public class AddTestDto
-    {
-        public string? Question { get; set; }
-        public List<string>? Options { get; set; }
-        public string? RightOption { get; set; }
-    }
+    public string? Question { get; set; }
+    public List<string>? Options { get; set; }
+    public string? RightOption { get; set; }
 }
+

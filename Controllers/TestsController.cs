@@ -1,42 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AdminPageMVC.Data;
+﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.Entities;
+using AdminPageMVC.OnlyModelViews;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPageMVC.Controllers
 {
     public class TestsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly ITestRepository _testRepository;
 
-        public TestsController(AppDbContext context)
-        {
-            _context = context;
-        }
+        public TestsController(ITestRepository testRepository) => _testRepository = testRepository;
+
 
         // GET: Tests
         public async Task<IActionResult> Index()
         {
-              return _context.Tests != null ? 
-                          View(await _context.Tests.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Tests'  is null.");
+            List<Test> allTests = await _testRepository.GetAll();
+            return View(allTests);
         }
 
         // GET: Tests/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.Tests == null)
+            if (id == null || _testRepository.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var test = await _context.Tests
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var test = await _testRepository.GetTestById(id);
             if (test == null)
             {
                 return NotFound();
@@ -46,36 +37,37 @@ namespace AdminPageMVC.Controllers
         }
 
         // GET: Tests/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
-        // POST: Tests/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Question,Variants,RightVariant")] Test test)
+        public async Task<IActionResult> Create(AddTestDto addTestDto)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(test);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(test);
+            if (!ModelState.IsValid) return View();
+
+            Test test = new Test();
+            test.Question = addTestDto.Question;
+            test.Variants = addTestDto.Options;
+            test.RightVariant = addTestDto.RightOption;
+
+            await _testRepository.AddTestAsync(test);
+            return RedirectToAction(nameof(Index));
+
+
         }
 
-        // GET: Tests/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Tests == null)
+            if (id == null || _testRepository.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var test = await _context.Tests.FindAsync(id);
+            var test = await _testRepository.GetTestById(id);
             if (test == null)
             {
                 return NotFound();
@@ -83,56 +75,35 @@ namespace AdminPageMVC.Controllers
             return View(test);
         }
 
-        // POST: Tests/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Question,Variants,RightVariant")] Test test)
-        {
-            if (id != test.Id)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(test);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TestExists(test.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(test);
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, AddTestDto addTestDto)
+        {
+
+            Test test = new Test();
+            test.Question = addTestDto.Question;
+            test.Variants = addTestDto.Options;
+            test.RightVariant = addTestDto.RightOption;
+            await _testRepository.UpdateTest(test);
+
+            await _testRepository.AddTestAsync(test);
+            var alltest = _testRepository.GetAll();
+            return RedirectToAction(nameof(Index));
+
         }
 
-        // GET: Tests/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Tests == null)
+            if (id == null)
             {
                 return NotFound();
             }
-
-            var test = await _context.Tests
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var test = await _testRepository.GetTestById(id);
             if (test == null)
             {
                 return NotFound();
             }
-
             return View(test);
         }
 
@@ -141,23 +112,15 @@ namespace AdminPageMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Tests == null)
+            if (_testRepository.GetAll == null)
             {
                 return Problem("Entity set 'AppDbContext.Tests'  is null.");
             }
-            var test = await _context.Tests.FindAsync(id);
-            if (test != null)
+            if (id != null)
             {
-                _context.Tests.Remove(test);
+                await _testRepository.DeleteTestAsync(id);
             }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool TestExists(int id)
-        {
-          return (_context.Tests?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

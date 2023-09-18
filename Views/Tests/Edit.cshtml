@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form action="@Url.Action("Edit", "Tests")" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -35,6 +35,57 @@
         </form>
     </div>
 </div>
+
+@*<table class="user-table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Question</th>
+            <th>Options</th>
+            <th>Right Option</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var test in Model)
+        {
+            <tr>
+                <form action="@Url.Action("Edit", "Test")" method="post">
+                <td>
+                    <span>@test.Id</span>
+                </td>
+                <td>
+                    <span class="view-mode">@test.Question</span>
+                    <input type="text" class="edit-mode hide" name="question" value="@test.Question" />
+                    <input type="hidden" name="id" value="@test.Id" />
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var option in test.Options)
+                        {
+                            <span class="view-mode">@option</span>
+                            <input type="text" class="edit-mode hide" name="option" value="@option" />
+
+                        }
+                    </ul>
+
+                </td>
+                <td>
+                    <span class="view-mode">@test.RightOption</span>
+                    <input type="text" class="edit-mode hide" name="description" value="@test.RightOption" />
+                </td>
+                <td>
+                    <a class="btn-update">Update</a>
+                    <button class="btn-confirm hide" asp-controller="Tests" asp-action="Edit" type="submit">Confirm</button>
+                    <button class="btn-delete" asp-controller="Tests" asp-action="Delete" type="submit">Delete</button>
+                    <a class="btn-cancel hide">Cancel</a>
+                </td>
+                </form>
+            </tr>
+        }
+    </tbody>
+</table>*@
+
 
 <div>
     <a asp-action="Index">Back to List</a>

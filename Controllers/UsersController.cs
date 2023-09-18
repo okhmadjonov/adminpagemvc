@@ -91,7 +91,6 @@ namespace AdminPageMVC.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, string newFullName, string newEmail, string newPassword)
         {
 
@@ -101,8 +100,9 @@ namespace AdminPageMVC.Controllers
             userDTO.Password = newPassword;
 
             await UserRepository.UpdateUserAsync(id, userDTO);
+
             var allUsers = UserRepository.GetAllUsersAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Users/Delete/5

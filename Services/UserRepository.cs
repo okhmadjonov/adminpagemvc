@@ -37,6 +37,7 @@ namespace AdminPageinMVC.Repository.Repositories
                 firstOrDefaultAsync.FullName = userDto.FullName;
                 firstOrDefaultAsync.Email = userDto.Email;
                 firstOrDefaultAsync.Password = userDto.Password;
+
                 _context.Entry(firstOrDefaultAsync).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }

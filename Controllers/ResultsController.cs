@@ -40,7 +40,7 @@ namespace AdminPageMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AddResultDto addResultDto)
         {
-            if (!ModelState.IsValid) return View("ResultTable");
+            if (!ModelState.IsValid) return View("Index");
             Result result = new Result();
             result.Url = addResultDto.Url;
             result.User = await _userRepository.GetUserByIdAsync(addResultDto.UserId);
@@ -77,7 +77,6 @@ namespace AdminPageMVC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, AddResultDto addResultDto)
         {
             if (!ModelState.IsValid) return View("ResultTable");

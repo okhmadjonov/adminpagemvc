@@ -77,6 +77,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\user.jpg"
     },
     {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\css\\mvc-grid\\mvc-grid.css",
+      "PackagePath": "staticwebassets\\css\\mvc-grid\\mvc-grid.css"
+    },
+    {
       "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -91,6 +95,10 @@
     {
       "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\js\\datatables-simple-demo.js",
       "PackagePath": "staticwebassets\\js\\datatables-simple-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\js\\mvc-grid\\mvc-grid.js",
+      "PackagePath": "staticwebassets\\js\\mvc-grid\\mvc-grid.js"
     },
     {
       "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\js\\scripts.js",

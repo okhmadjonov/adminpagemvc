@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0aXHAbX5+1Z34Yj5g7+jbVxhwoi8EWq/uSlXS9mNGWU=",
+  "Hash": "h8CpzDGdbWtn0im9530hDsuLgDDOL3JIwkWRtS8BbG8=",
   "Source": "AdminPageMVC",
   "BasePath": "_content/AdminPageMVC",
   "Mode": "Default",
@@ -1377,6 +1377,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\img\\user.jpg"
     },
     {
+      "Identity": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\css\\mvc-grid\\mvc-grid.css",
+      "SourceId": "AdminPageMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\",
+      "BasePath": "_content/AdminPageMVC",
+      "RelativePath": "css/mvc-grid/mvc-grid.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\mvc-grid\\mvc-grid.css"
+    },
+    {
       "Identity": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\css\\site.css",
       "SourceId": "AdminPageMVC",
       "SourceType": "Discovered",
@@ -1443,6 +1460,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\datatables-simple-demo.js"
+    },
+    {
+      "Identity": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\js\\mvc-grid\\mvc-grid.js",
+      "SourceId": "AdminPageMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\",
+      "BasePath": "_content/AdminPageMVC",
+      "RelativePath": "js/mvc-grid/mvc-grid.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\mvc-grid\\mvc-grid.js"
     },
     {
       "Identity": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\js\\scripts.js",

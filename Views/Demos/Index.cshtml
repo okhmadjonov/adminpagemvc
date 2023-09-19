@@ -1,0 +1,46 @@
+﻿
+@model List<AdminPageMVC.Entities.Demo>
+
+
+
+
+
+
+<div class="container" style="margin-top:50px;">
+
+    @(Html
+         .Grid(Model)
+         .Build(columns =>
+         {
+             columns.Add(model => Html.CheckBox("Check_" + model.Id)).Titled(Html.CheckBox("CheckAll"));
+             columns.Add().RenderedAs((model, row) => row + 1).Titled("#").Css("text-center");
+
+             columns.Add(model => model.Name).Titled("Name");
+             columns.Add(model => model.Address).Titled("Address");
+             columns.Add().Encoded(false).RenderedAs(model =>
+             {
+                 return
+                 $@"
+
+                      <button class=""btn-confirm hide  btn btn-warning"" asp-controller=""Education"" asp-action=""UpdateEducation"" type=""submit"">Confirm</button>
+                      <button class=""btn-delete btn btn-danger"" asp-controller=""Education"" asp-action=""DeleteCourse"" type=""submit"">Delete</button>
+
+
+                 ";
+             }).Titled("Actions");
+
+         })
+         .Filterable()
+         .Sortable()
+         )
+
+</div>
+
+
+
+<!---
+<a class="" btn-update"">Update</a>
+//<a class="" btn-cancel hide"">Cancel</a>
+*/
+
+    ->

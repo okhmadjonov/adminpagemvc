@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.Data;
-using AdminPageMVC.Entities;
+using AdminPageMVC.DTO;
+using AdminPageMVC.OnlyModelViews;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdminPageMVC.Controllers
 {
     public class HomeworkController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IHomeworkRepository _homeworkRepository;
 
-        public HomeworkController(AppDbContext context)
+        public HomeworkController(IHomeworkRepository homeworkRepository, AppDbContext context)
         {
+            _homeworkRepository = homeworkRepository;
             _context = context;
         }
-
         // GET: Homework
         public async Task<IActionResult> Index()
         {
-              return _context.Homeworks != null ? 
-                          View(await _context.Homeworks.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Homeworks'  is null.");
+            var homework = await _homeworkRepository.GetAllHomeworkAsync();
+            return View("Index", homework);
         }
 
         // GET: Homework/Details/5
@@ -51,24 +48,23 @@ namespace AdminPageMVC.Controllers
             return View();
         }
 
-        // POST: Homework/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ImageUrl,Description")] Homework homework)
+        public async Task<IActionResult> Create(AddHomeworkDto addHomeworkDto)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(homework);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(homework);
+            if (!ModelState.IsValid) return View();
+            var homework = new HomeworkDTO();
+            homework.ImageUrl = addHomeworkDto.ImageUrl;
+            homework.Description = addHomeworkDto.Description;
+            var findTask = await _context.Tasks.FirstOrDefaultAsync(c => c.Id == addHomeworkDto.TaskId);
+            if (findTask != null) homework.Task = findTask;
+            await _homeworkRepository.AddHomeworkAsync(homework);
+            // var allListHomework = await _homeworkRepository.GetAllHomeworkAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Homework/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null || _context.Homeworks == null)
             {
@@ -83,39 +79,54 @@ namespace AdminPageMVC.Controllers
             return View(homework);
         }
 
-        // POST: Homework/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ImageUrl,Description")] Homework homework)
+        public async Task<IActionResult> Edit(int id, AddHomeworkDto addHomeworkDto)
         {
-            if (id != homework.Id)
-            {
-                return NotFound();
-            }
+            //if (id != homework.Id)
+            //{
+            //    return NotFound();
+            //}
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(homework);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!HomeworkExists(homework.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(homework);
+            //if (ModelState.IsValid)
+            //{
+            //    try
+            //    {
+            //        _context.Update(homework);
+            //        await _context.SaveChangesAsync();
+            //    }
+            //    catch (DbUpdateConcurrencyException)
+            //    {
+            //        if (!HomeworkExists(homework.Id))
+            //        {
+            //            return NotFound();
+            //        }
+            //        else
+            //        {
+            //            throw;
+            //        }
+            //    }
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //return View(homework);
+
+            if (!ModelState.IsValid) return View("_HomeworkPage");
+            var homeworkDto = new HomeworkDTO();
+            homeworkDto.ImageUrl = addHomeworkDto.ImageUrl;
+            homeworkDto.Description = addHomeworkDto.Description;
+            var findTask = await _context.Tasks.FirstOrDefaultAsync(c => c.Id == addHomeworkDto.TaskId);
+            if (findTask != null) homeworkDto.Task = findTask;
+            await _homeworkRepository.UpdateHomeworkAsync(id, homeworkDto);
+            var allListHomework = await _homeworkRepository.GetAllHomeworkAsync();
+            return RedirectToAction(nameof(Index));
+
+
+
+
+
+
+
         }
 
         // GET: Homework/Delete/5
@@ -150,14 +161,14 @@ namespace AdminPageMVC.Controllers
             {
                 _context.Homeworks.Remove(homework);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool HomeworkExists(int id)
         {
-          return (_context.Homeworks?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Homeworks?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

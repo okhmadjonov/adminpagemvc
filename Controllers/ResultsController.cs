@@ -1,81 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AdminPageMVC.Data;
+﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.Entities;
+using AdminPageMVC.OnlyModelViews;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPageMVC.Controllers
 {
     public class ResultsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IResultRepository _resultRepository;
+        private readonly IEducationRepository _educationRepository;
+        private readonly IUserRepository _userRepository;
 
-        public ResultsController(AppDbContext context)
+        public ResultsController(IResultRepository resultRepository, IEducationRepository educationRepository, IUserRepository userRepository)
         {
-            _context = context;
+            _resultRepository = resultRepository;
+            _educationRepository = educationRepository;
+            _userRepository = userRepository;
         }
 
         // GET: Results
         public async Task<IActionResult> Index()
         {
-              return _context.Results != null ? 
-                          View(await _context.Results.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Results'  is null.");
+            var allResult = await _resultRepository.GetAllResultAsync();
+
+            return View("Index", allResult);
         }
 
-        // GET: Results/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Results == null)
-            {
-                return NotFound();
-            }
 
-            var result = await _context.Results
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return View(result);
-        }
 
         // GET: Results/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.EducationList = await _educationRepository.GetAllEducationAsync();
+            ViewBag.UserList = await _userRepository.GetAllUsersAsync();
             return View();
         }
 
-        // POST: Results/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Url")] Result result)
+        public async Task<IActionResult> Create(AddResultDto addResultDto)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(result);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(result);
+            if (!ModelState.IsValid) return View("ResultTable");
+            Result result = new Result();
+            result.Url = addResultDto.Url;
+            result.User = await _userRepository.GetUserByIdAsync(addResultDto.UserId);
+            result.Study = await _educationRepository.GetEducationByIdAsync(addResultDto.EducationId);
+            await _resultRepository.AddResultAsync(result);
+            var allResultAsync = await _resultRepository.GetAllResultAsync();
+            return View("Index", allResultAsync);
         }
 
         // GET: Results/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Results == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var result = await _context.Results.FindAsync(id);
+            var result = await _resultRepository.GetResultByIdAsync(id);
             if (result == null)
             {
                 return NotFound();
@@ -83,57 +66,46 @@ namespace AdminPageMVC.Controllers
             return View(result);
         }
 
-        // POST: Results/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public async Task<IActionResult> GetResultById(int id)
+        {
+            if (!ModelState.IsValid) return View("ResultTable");
+            var resultByIdAsync = await _resultRepository.GetResultByIdAsync(id);
+            ViewBag.EducationList = await _educationRepository.GetAllEducationAsync();
+            ViewBag.UserList = await _userRepository.GetAllUsersAsync();
+            return View("Edit", resultByIdAsync);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Url")] Result result)
+        public async Task<IActionResult> Edit(int id, AddResultDto addResultDto)
         {
-            if (id != result.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(result);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ResultExists(result.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(result);
+            if (!ModelState.IsValid) return View("ResultTable");
+            var result = await _resultRepository.GetResultByIdAsync(id);
+            result.Url = addResultDto.Url;
+            result.Study = await _educationRepository.GetEducationByIdAsync(addResultDto.EducationId);
+            result.User = await _userRepository.GetUserByIdAsync(addResultDto.UserId);
+            await _resultRepository.UpdateResultAsync(result);
+            var all = await _resultRepository.GetAllResultAsync();
+            return View("Index", all);
         }
 
         // GET: Results/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Results == null)
+
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var result = await _context.Results
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (result == null)
+            var course = await _resultRepository.GetResultByIdAsync(id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(result);
+            return View(course);
         }
 
         // POST: Results/Delete/5
@@ -141,23 +113,12 @@ namespace AdminPageMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Results == null)
-            {
-                return Problem("Entity set 'AppDbContext.Results'  is null.");
-            }
-            var result = await _context.Results.FindAsync(id);
-            if (result != null)
-            {
-                _context.Results.Remove(result);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid) return View("Index");
+            await _resultRepository.DeleteResultAsync(id);
+            var all = await _resultRepository.GetAllResultAsync();
+            return View("Index", all);
         }
 
-        private bool ResultExists(int id)
-        {
-          return (_context.Results?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+
     }
 }

@@ -17,7 +17,7 @@ namespace AdminPageMVC.Controllers
         public async Task<IActionResult> Index()
         {
             var allCourse = await _courseRepository.GetAllCourseAsync();
-            return View(allCourse);
+            return View("Index", allCourse);
         }
 
         // GET: Courses/Details/5

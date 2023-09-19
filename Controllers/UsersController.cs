@@ -118,7 +118,6 @@ namespace AdminPageMVC.Controllers
             {
                 return NotFound();
             }
-
             return View(user);
         }
 
@@ -131,16 +130,11 @@ namespace AdminPageMVC.Controllers
             {
                 return Problem("Entity set 'AppDbContext.Users'  is null.");
             }
-            //var user = await UserRepository.GetUserByIdAsync(id);
             if (id != null)
             {
                 await UserRepository.DeleteUserAsync(id);
             }
-
-
             return RedirectToAction(nameof(Index));
         }
-
-
     }
 }

@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.Data;
-using AdminPageMVC.Entities;
+using AdminPageMVC.DTO;
+using AdminPageMVC.OnlyModelViews;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdminPageMVC.Controllers
 {
     public class LessonsController : Controller
     {
+        private readonly ILessonRepository _lessonRepository;
         private readonly AppDbContext _context;
-
-        public LessonsController(AppDbContext context)
+        public LessonsController(ILessonRepository lessonRepository, AppDbContext context)
         {
+            _lessonRepository = lessonRepository;
             _context = context;
         }
 
         // GET: Lessons
         public async Task<IActionResult> Index()
         {
-              return _context.Lessons != null ? 
-                          View(await _context.Lessons.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Lessons'  is null.");
+            var lessons = await _lessonRepository.GetAllLessonAsync();
+            return View("Index", lessons);
         }
 
         // GET: Lessons/Details/5
@@ -51,24 +48,30 @@ namespace AdminPageMVC.Controllers
             return View();
         }
 
-        // POST: Lessons/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Videourl,Information")] Lesson lesson)
+        public async Task<IActionResult> Create(AddLessonDto addLessonDto)
         {
-            if (ModelState.IsValid)
+
+
+            if (string.IsNullOrWhiteSpace(addLessonDto.Title) || string.IsNullOrWhiteSpace(addLessonDto.VideoUrl) || string.IsNullOrWhiteSpace(addLessonDto.Information))
             {
-                _context.Add(lesson);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ModelState.AddModelError("", "All fields must be filled");
+                return View("_LessonPage");
             }
-            return View(lesson);
+            var lesson = new LessonDTO();
+            lesson.Title = addLessonDto.Title;
+            lesson.VideoUrl = addLessonDto.VideoUrl;
+            lesson.Information = addLessonDto.Information;
+            var findCourse = await _context.Courses.FirstOrDefaultAsync(c => c.Id == addLessonDto.CourseId);
+            if (findCourse != null) lesson.Course = findCourse;
+            await _lessonRepository.AddLessonAsync(lesson);
+            var getLessonList = await _lessonRepository.GetAllLessonAsync();
+            return RedirectToAction(nameof(Index));
+
+
         }
 
-        // GET: Lessons/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null || _context.Lessons == null)
             {
@@ -83,39 +86,23 @@ namespace AdminPageMVC.Controllers
             return View(lesson);
         }
 
-        // POST: Lessons/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Videourl,Information")] Lesson lesson)
-        {
-            if (id != lesson.Id)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, AddLessonDto addLessonDto)
+        {
+            if (!ModelState.IsValid) return View("_LessonPage");
+            var lesson = new LessonDTO();
+            lesson.Title = addLessonDto.Title;
+            lesson.VideoUrl = addLessonDto.VideoUrl;
+            lesson.Information = addLessonDto.Information;
+            var findCourse = await _context.Courses.FirstOrDefaultAsync(c => c.Id == addLessonDto.CourseId);
+            if (findCourse != null)
             {
-                try
-                {
-                    _context.Update(lesson);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LessonExists(lesson.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                lesson.Course = findCourse;
             }
-            return View(lesson);
+            await _lessonRepository.UpdateLessonAsync(id, lesson);
+            var allListLesson = await _lessonRepository.GetAllLessonAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Lessons/Delete/5
@@ -150,14 +137,14 @@ namespace AdminPageMVC.Controllers
             {
                 _context.Lessons.Remove(lesson);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LessonExists(int id)
         {
-          return (_context.Lessons?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Lessons?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

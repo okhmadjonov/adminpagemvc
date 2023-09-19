@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AdminPageMVC.Entities.Homework>
+﻿@model List<AdminPageMVC.DTO.HomeworkDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,10 +14,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
+               ImageUrl
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Description
             </th>
             <th></th>
         </tr>

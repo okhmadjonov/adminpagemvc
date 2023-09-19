@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AdminPageMVC.Entities.Lesson>
+﻿@model List<AdminPageMVC.DTO.LessonDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,13 +14,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+              Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Videourl)
+                Videourl
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Information)
+              Information
             </th>
             <th></th>
         </tr>
@@ -32,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Videourl)
+                @Html.DisplayFor(modelItem => item.VideoUrl)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Information)

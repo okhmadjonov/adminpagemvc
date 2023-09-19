@@ -9,9 +9,9 @@ namespace AdminPageMVC.DTO
         public string? Title { get; set; }
         public string? Description { get; set; }
 
-        public DateTimeOffset DateTime { get; set; }
+        public DateTime DateTime { get; set; }
 
         public Lesson Lesson { get; set; }
-        public EProcess Process { get; set; }
+        public EProcess? Process { get; set; }
     }
 }

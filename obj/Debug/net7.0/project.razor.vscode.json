@@ -24072,11 +24072,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\Views\\Homework\\Delete.cshtml",
-      "TargetPath": "Views\\Homework\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\Views\\Reviews\\Index.cshtml",
       "TargetPath": "Views\\Reviews\\Index.cshtml",
       "FileKind": "mvc"
@@ -24254,11 +24249,6 @@
     {
       "FilePath": "c:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\Views\\Tasks\\Delete.cshtml",
       "TargetPath": "Views\\Tasks\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\Views\\Homework\\Details.cshtml",
-      "TargetPath": "Views\\Homework\\Details.cshtml",
       "FileKind": "mvc"
     },
     {

@@ -1,12 +1,30 @@
 ﻿
 @model List<AdminPageMVC.Entities.Demo>
-@(Html
+
+
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container" style="margin-top:50px;">
+
+    <h1>Demos</h1>
+    <p><a asp-action="Create">Create New</a></p>
+    <br />
+
+    @(Html
     .Grid(Model)
     .Build(columns =>
     {
         columns.Add(model => model.Id).Titled("Id").Filterable(true).Sortable(true);
         columns.Add(model => model.Name).Titled("Name").Filterable(true).Sortable(true);
-        //columns.Add(model => model.PhoneNumber).Titled("PhoneNumber").Filterable(true).Sortable(true);
+        //columns.Add(model => model.Description).Titled("Description").Filterable(true).Sortable(true);
         //columns.Add(model => model.DateTime).Titled("DateTime").Filterable(true).Sortable(true);
 
         columns.Add().Encoded(false).RenderedAs(model =>
@@ -14,13 +32,14 @@
 
             return $@"
 
-	  <div>
-                <a href=""/Contacts/Edit/{model.Id}"" class=""btn btn-primary btn-sm"">Edit</a>
-            </div>
-            <form method=""post"" action=""/Contacts/Delete"" class=""delete-form"">
+	        <div class=""edit_delete"" style=""display:flex; gap:10px;"">
+              <a href=""/Homeworks/Edit/{model.Id}"" class=""btn btn-warning btn-sm"">Edit</a>
+
+            <form method=""post"" action=""/Homeworks/Delete"" class=""delete-form"">
                 <input type=""hidden"" name=""id"" value=""{model.Id}"" />
-                <button class=""btn-delete"" type=""submit"" data-id=""{model.Id}"">Delete</button>
+                <button class=""btn btn-danger"" type=""submit"" data-id=""{model.Id}"">Delete</button>
             </form>
+            </div>
         ";
         }).Titled("Actions");
 
@@ -29,7 +48,7 @@
 
 
 
-<script>
+    <script>
         $(document).ready(function () {
             $(".btn-delete").on("click", function (e) {
                 e.preventDefault();
@@ -41,7 +60,10 @@
                 }
             });
         });
-</script>
+    </script>
+
+</div>
+
 
 
 

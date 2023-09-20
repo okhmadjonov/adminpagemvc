@@ -57,7 +57,7 @@ public class HomeworkRepository : IHomeworkRepository
         homeworkFindAsync.Id = id;
         homeworkFindAsync.ImageUrl = homeworkDto.ImageUrl;
         homeworkFindAsync.Description = homeworkDto.Description;
-        homeworkFindAsync.Task = homeworkDto.Task;
+
 
         _context.Entry(homeworkFindAsync).State = EntityState.Modified;
         await _context.SaveChangesAsync();

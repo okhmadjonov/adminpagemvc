@@ -32,12 +32,9 @@
             return $@"
             <form method=""post"" action=""/Contacts/Delete"" class=""delete-form"">
                 <input type=""hidden"" name=""id"" value=""{model.Id}"" />
-                <button class=""btn-delete"" type=""submit"" data-id=""{model.Id}"">Delete</button>
-                <a class=""btn-cancel hide"">Cancel</a>
+                <button class=""btn-delete"" type=""submit"" data-id=""{model.Id}"">Delete</button>       
             </form>
         ";
-
-
         }).Titled("Actions");
 
     })

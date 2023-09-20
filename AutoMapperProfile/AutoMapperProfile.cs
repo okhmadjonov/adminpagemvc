@@ -11,6 +11,7 @@ namespace AdminPageMVC.AutoMapperProfile
         public AutoMapperProfile()
         {
             CreateMap<Contact, ContactDto>().ReverseMap();
+            CreateMap<Course, AddCourseDto>().ReverseMap();
         }
 
     }

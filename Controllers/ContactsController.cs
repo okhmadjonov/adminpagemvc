@@ -49,6 +49,7 @@ namespace AdminPageMVC.Controllers
         }
 
 
+        // GET: Contacts/Delete/id
         public async Task<IActionResult> Delete(int id)
         {
             await _contactRepository.Delete(id);

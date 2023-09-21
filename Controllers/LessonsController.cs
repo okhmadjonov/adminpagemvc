@@ -2,6 +2,7 @@
 using AdminPageMVC.Data;
 using AdminPageMVC.DTO;
 using AdminPageMVC.OnlyModelViews;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,12 @@ namespace AdminPageMVC.Controllers
     {
         private readonly ILessonRepository _lessonRepository;
         private readonly AppDbContext _context;
-        public LessonsController(ILessonRepository lessonRepository, AppDbContext context)
+        private readonly IMapper _mapper;
+        public LessonsController(ILessonRepository lessonRepository, AppDbContext context, IMapper mapper)
         {
             _lessonRepository = lessonRepository;
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Lessons
@@ -24,65 +27,39 @@ namespace AdminPageMVC.Controllers
             return View("Index", lessons);
         }
 
-        // GET: Lessons/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Lessons == null)
-            {
-                return NotFound();
-            }
 
-            var lesson = await _context.Lessons
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (lesson == null)
-            {
-                return NotFound();
-            }
-
-            return View(lesson);
-        }
 
         // GET: Lessons/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
         public async Task<IActionResult> Create(AddLessonDto addLessonDto)
         {
-
-
-            if (string.IsNullOrWhiteSpace(addLessonDto.Title) || string.IsNullOrWhiteSpace(addLessonDto.VideoUrl) || string.IsNullOrWhiteSpace(addLessonDto.Information))
-            {
-                ModelState.AddModelError("", "All fields must be filled");
-                return View("_LessonPage");
-            }
-            var lesson = new LessonDTO();
-            lesson.Title = addLessonDto.Title;
-            lesson.VideoUrl = addLessonDto.VideoUrl;
-            lesson.Information = addLessonDto.Information;
+            //if (string.IsNullOrWhiteSpace(addLessonDto.Title) || string.IsNullOrWhiteSpace(addLessonDto.VideoUrl) || string.IsNullOrWhiteSpace(addLessonDto.Information))
+            //{
+            //    ModelState.AddModelError("", "All fields must be filled");
+            //    return View("Index");
+            //}
+            //var lesson = new LessonDTO();
+            //lesson.Title = addLessonDto.Title;
+            //lesson.VideoUrl = addLessonDto.VideoUrl;
+            //lesson.Information = addLessonDto.Information;
+            var lesson = _mapper.Map<LessonDTO>(addLessonDto);
             var findCourse = await _context.Courses.FirstOrDefaultAsync(c => c.Id == addLessonDto.CourseId);
             if (findCourse != null) lesson.Course = findCourse;
             await _lessonRepository.AddLessonAsync(lesson);
             var getLessonList = await _lessonRepository.GetAllLessonAsync();
             return RedirectToAction(nameof(Index));
-
-
         }
+
+
+        public async Task<IActionResult> GetByIdEducation(int id)
+        {
+            var teacherByIdAsync = await _lessonRepository.GetLessonByIdAsync(id);
+            return View("_ByIdLesson", teacherByIdAsync);
+        }
+
 
         public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Lessons == null)
-            {
-                return NotFound();
-            }
-
             var lesson = await _context.Lessons.FindAsync(id);
-            if (lesson == null)
-            {
-                return NotFound();
-            }
             return View(lesson);
         }
 
@@ -90,7 +67,7 @@ namespace AdminPageMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, AddLessonDto addLessonDto)
         {
-            if (!ModelState.IsValid) return View("_LessonPage");
+            if (!ModelState.IsValid) return View("Index");
             var lesson = new LessonDTO();
             lesson.Title = addLessonDto.Title;
             lesson.VideoUrl = addLessonDto.VideoUrl;
@@ -105,46 +82,17 @@ namespace AdminPageMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Lessons/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Lessons == null)
-            {
-                return NotFound();
-            }
 
-            var lesson = await _context.Lessons
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (lesson == null)
-            {
-                return NotFound();
-            }
 
-            return View(lesson);
-        }
-
-        // POST: Lessons/Delete/5
+        // POST: Lessons/Delete/id
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Lessons == null)
-            {
-                return Problem("Entity set 'AppDbContext.Lessons'  is null.");
-            }
             var lesson = await _context.Lessons.FindAsync(id);
-            if (lesson != null)
-            {
-                _context.Lessons.Remove(lesson);
-            }
-
+            _context.Lessons.Remove(lesson);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LessonExists(int id)
-        {
-            return (_context.Lessons?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }

@@ -76,20 +76,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/_ByIdLesson.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xfQnlJZExlc3Nvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Create.cshtml]

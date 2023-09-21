@@ -78,7 +78,7 @@ namespace AdminPageMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (!ModelState.IsValid) return View("Index");
             await UserRepository.DeleteUserAsync(id);

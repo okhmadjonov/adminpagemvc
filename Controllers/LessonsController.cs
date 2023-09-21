@@ -86,7 +86,7 @@ namespace AdminPageMVC.Controllers
 
         // POST: Lessons/Delete/id
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var lesson = await _context.Lessons.FindAsync(id);
             _context.Lessons.Remove(lesson);

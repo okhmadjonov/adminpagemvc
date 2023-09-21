@@ -36,7 +36,7 @@ namespace AdminPageMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AddEducationDto educationDto)
         {
-            if (!ModelState.IsValid) return View("_EducationPage");
+            if (!ModelState.IsValid) return View("Index");
             var edu = new DTO.StudyDTO();
             edu.Title = educationDto.Title;
             edu.Finish = educationDto.End;
@@ -49,7 +49,7 @@ namespace AdminPageMVC.Controllers
 
             await _educationRepository.AddEducationAsync(edu);
             var getEducationList = await _educationRepository.GetAllEducationAsync();
-            return View("_EducationPage", getEducationList);
+            return View("Index", getEducationList);
         }
 
 
@@ -61,9 +61,9 @@ namespace AdminPageMVC.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> UpdateEducation(int id, AddEducationDto educationDto)
+        public async Task<IActionResult> Edit(int id, AddEducationDto educationDto)
         {
-            if (!ModelState.IsValid) return View("_EducationPage");
+            if (!ModelState.IsValid) return View("Index");
             var education = new DTO.StudyDTO();
             education.Title = educationDto.Title;
             education.Finish = educationDto.End;
@@ -80,7 +80,7 @@ namespace AdminPageMVC.Controllers
 
 
 
-        public async Task<IActionResult> DeleteCourse(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             await _educationRepository.DeleteEducationAsync(id);
             var allListTeachers = await _educationRepository.GetAllEducationAsync();

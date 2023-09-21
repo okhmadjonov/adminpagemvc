@@ -61,7 +61,7 @@ namespace AdminPageMVC.Controllers
         }
 
 
-        public async Task<IActionResult> DeleteTest(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             await _testRepository.DeleteTestAsync(id);
             var allListTest = await _testRepository.GetAll();

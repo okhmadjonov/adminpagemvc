@@ -74,9 +74,9 @@ namespace AdminPageMVC.Controllers
         }
 
 
-        public async Task<IActionResult> DeleteTeacher() => View("Delete");
+        public async Task<IActionResult> Delete() => View("Delete");
         [HttpPost]
-        public async Task<IActionResult> DeleteTeacher(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (!ModelState.IsValid) return View("Index");
             await _teacherRepository.DeleteTeacherAsync(id);

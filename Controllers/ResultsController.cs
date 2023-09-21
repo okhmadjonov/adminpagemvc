@@ -61,7 +61,7 @@ namespace AdminPageMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> GetResultById(int id)
         {
-            if (!ModelState.IsValid) return View("ResultTable");
+            if (!ModelState.IsValid) return View("Index");
             var resultByIdAsync = await _resultRepository.GetResultByIdAsync(id);
             ViewBag.EducationList = await _educationRepository.GetAllEducationAsync();
             ViewBag.UserList = await _userRepository.GetAllUsersAsync();

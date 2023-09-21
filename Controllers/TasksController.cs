@@ -73,7 +73,7 @@ namespace AdminPageMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateTask(int id, AddTaskDto lessonDto)
+        public async Task<IActionResult> Edit(int id, AddTaskDto lessonDto)
         {
             if (!ModelState.IsValid) return View("Index");
             var task = new TaskDTO();
@@ -90,7 +90,7 @@ namespace AdminPageMVC.Controllers
 
 
 
-        public async Task<IActionResult> DeleteTask(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             await _taskRepository.DeleteTaskAsync(id);
             var allListTask = await _taskRepository.GetAllTaskAsync();

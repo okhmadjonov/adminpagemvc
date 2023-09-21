@@ -1,6 +1,7 @@
 ﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.Entities;
 using AdminPageMVC.OnlyModelViews;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPageMVC.Controllers
@@ -10,12 +11,16 @@ namespace AdminPageMVC.Controllers
         private readonly IResultRepository _resultRepository;
         private readonly IEducationRepository _educationRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public ResultsController(IResultRepository resultRepository, IEducationRepository educationRepository, IUserRepository userRepository)
+        public ResultsController(IResultRepository resultRepository, IEducationRepository educationRepository,
+            IMapper mapper,
+            IUserRepository userRepository)
         {
             _resultRepository = resultRepository;
             _educationRepository = educationRepository;
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         // GET: Results
@@ -40,9 +45,10 @@ namespace AdminPageMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AddResultDto addResultDto)
         {
-            if (!ModelState.IsValid) return View("Index");
-            Result result = new Result();
-            result.Url = addResultDto.Url;
+            //if (!ModelState.IsValid) return View("Index");
+            //Result result = new Result();
+            //result.Url = addResultDto.Url;
+            var result = _mapper.Map<Result>(addResultDto);
             result.User = await _userRepository.GetUserByIdAsync(addResultDto.UserId);
             result.Study = await _educationRepository.GetEducationByIdAsync(addResultDto.EducationId);
             await _resultRepository.AddResultAsync(result);
@@ -50,21 +56,7 @@ namespace AdminPageMVC.Controllers
             return View("Index", allResultAsync);
         }
 
-        // GET: Results/Edit/5
-        public async Task<IActionResult> Edit(int id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var result = await _resultRepository.GetResultByIdAsync(id);
-            if (result == null)
-            {
-                return NotFound();
-            }
-            return View(result);
-        }
 
         [HttpPost]
         public async Task<IActionResult> GetResultById(int id)
@@ -79,7 +71,7 @@ namespace AdminPageMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, AddResultDto addResultDto)
         {
-            if (!ModelState.IsValid) return View("ResultTable");
+            if (!ModelState.IsValid) return View("Index");
             var result = await _resultRepository.GetResultByIdAsync(id);
             result.Url = addResultDto.Url;
             result.Study = await _educationRepository.GetEducationByIdAsync(addResultDto.EducationId);
@@ -89,35 +81,18 @@ namespace AdminPageMVC.Controllers
             return View("Index", all);
         }
 
-        // GET: Results/Delete/5
+
+        // POST: Results/Delete/id
+        public async Task<IActionResult> Delete() => View("Delete");
+
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
-        {
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var course = await _resultRepository.GetResultByIdAsync(id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            return View(course);
-        }
-
-        // POST: Results/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (!ModelState.IsValid) return View("Index");
             await _resultRepository.DeleteResultAsync(id);
             var all = await _resultRepository.GetAllResultAsync();
             return View("Index", all);
         }
-
 
     }
 }

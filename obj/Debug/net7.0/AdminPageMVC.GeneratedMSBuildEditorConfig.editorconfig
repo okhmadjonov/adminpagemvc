@@ -9,273 +9,269 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AdminPageMVC
 build_property.RootNamespace = AdminPageMVC
-build_property.ProjectDir = C:\Users\pc\Desktop\fulls\AdminPageMVC\
+build_property.ProjectDir = c:\Users\pc\Desktop\fulls\AdminPageMVC\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = true
-build_property.MSBuildProjectDirectory = C:\Users\pc\Desktop\fulls\AdminPageMVC
+build_property.MSBuildProjectDirectory = c:\Users\pc\Desktop\fulls\AdminPageMVC
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Auth/Login.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Contacts/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Contacts/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Contacts/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Contacts/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Delete.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Details.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Courses/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Demos/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Demos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVtb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Homework/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Homework/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXdvcmtcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Homework/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Homework/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXdvcmtcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Homework/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Homework/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXdvcmtcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Home/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Home/Privacy.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/_ByIdLesson.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Lessons/_ByIdLesson.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVzc29uc1xfQnlJZExlc3Nvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Delete.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0c1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Details.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0c1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Results/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Delete.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3c1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Details.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3c1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Reviews/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/Error.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/MvcGrid/Pager.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/MvcGrid/Pager.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE12Y0dyaWRcUGFnZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/MvcGrid/_Grid.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/MvcGrid/_Grid.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE12Y0dyaWRcX0dyaWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/_LayoutLogin.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/_LayoutLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Delete.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGllc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Details.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGllc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGllc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Studies/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGllc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0Fuc3dlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Delete.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0Fuc3dlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Details.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0Fuc3dlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0Fuc3dlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/TaskAnswers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0Fuc3dlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Delete.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Details.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tasks/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Delete.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Details.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Teachers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Delete.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Details.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Tests/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Users/Create.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Users/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Users/Details.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Users/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Users/Edit.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Users/Index.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/_ViewImports.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/_ViewStart.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/_Layout.cshtml]
+[c:/Users/pc/Desktop/fulls/AdminPageMVC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-fxxvlu8gev

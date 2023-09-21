@@ -1,4 +1,10 @@
-﻿using AdminPageMVC.Data;
+﻿using AdminPageinMVC.Repository;
+using AdminPageMVC.Data;
+using AdminPageMVC.DTO;
+using AdminPageMVC.Entities.enums;
+
+using AdminPageMVC.OnlyModelViews;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,37 +12,20 @@ namespace AdminPageMVC.Controllers
 {
     public class TasksController : Controller
     {
+        private readonly ITaskRepository _taskRepository;
         private readonly AppDbContext _context;
-
-        public TasksController(AppDbContext context)
+        private readonly IMapper _mapper;
+        public TasksController(ITaskRepository taskRepository, AppDbContext context, IMapper mapper)
         {
+            _taskRepository = taskRepository;
             _context = context;
+            _mapper = mapper;
         }
-
         // GET: Tasks
         public async Task<IActionResult> Index()
         {
-            return _context.Tasks != null ?
-                        View(await _context.Tasks.ToListAsync()) :
-                        Problem("Entity set 'AppDbContext.Tasks'  is null.");
-        }
-
-        // GET: Tasks/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Tasks == null)
-            {
-                return NotFound();
-            }
-
-            var task = await _context.Tasks
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (task == null)
-            {
-                return NotFound();
-            }
-
-            return View(task);
+            var allListTask = await _taskRepository.GetAllTaskAsync();
+            return View("Index", allListTask);
         }
 
         // GET: Tasks/Create
@@ -45,113 +34,69 @@ namespace AdminPageMVC.Controllers
             return View();
         }
 
-        // POST: Tasks/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,DateTime,Process")] Entities.Task task)
+        public async Task<IActionResult> Create(AddTaskDto lessonDto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View("Index");
+
+            var task = new TaskDTO
             {
-                _context.Add(task);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(task);
+                Process = EProcess.PROGRESS,
+                DateTime = DateTime.Now,
+                Title = lessonDto.Title,
+                Description = lessonDto.Description,
+            };
+
+            var findLesson = await _context.Lessons.FirstOrDefaultAsync(c => c.Id == lessonDto.LessonId);
+            if (findLesson != null) task.Lesson = findLesson;
+
+            await _taskRepository.AddTaskAsync(task);
+
+            var allListTask = await _taskRepository.GetAllTaskAsync();
+            return View("Index", allListTask);
         }
 
-        // GET: Tasks/Edit/5
+        public async Task<IActionResult> GetByIdTask(int id)
+        {
+            if (!ModelState.IsValid) return View("Index");
+            var taskByIdAsync = await _taskRepository.GetTaskByIdAsync(id);
+            return View("Edit", taskByIdAsync);
+        }
+
+        // GET: Tasks/Edit/id
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Tasks == null)
-            {
-                return NotFound();
-            }
 
             var task = await _context.Tasks.FindAsync(id);
-            if (task == null)
-            {
-                return NotFound();
-            }
+
             return View(task);
         }
 
-        // POST: Tasks/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,DateTime,Process")] Entities.Task task)
+        public async Task<IActionResult> UpdateTask(int id, AddTaskDto lessonDto)
         {
-            if (id != task.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(task);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TaskExists(task.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(task);
+            if (!ModelState.IsValid) return View("Index");
+            var task = new TaskDTO();
+            task.Process = EProcess.PROGRESS;
+            task.DateTime = DateTime.Now;
+            task.Title = lessonDto.Title;
+            task.Description = lessonDto.Description;
+            var findLesson = await _context.Lessons.FirstOrDefaultAsync(c => c.Id == lessonDto.LessonId);
+            if (findLesson != null) task.Lesson = findLesson;
+            await _taskRepository.UpdateTaskAsync(id, task);
+            var allListTask = await _taskRepository.GetAllTaskAsync();
+            return View("Index", allListTask);
         }
 
-        // GET: Tasks/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+
+        public async Task<IActionResult> DeleteTask(int id)
         {
-            if (id == null || _context.Tasks == null)
-            {
-                return NotFound();
-            }
-
-            var task = await _context.Tasks
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (task == null)
-            {
-                return NotFound();
-            }
-
-            return View(task);
+            await _taskRepository.DeleteTaskAsync(id);
+            var allListTask = await _taskRepository.GetAllTaskAsync();
+            return View("Index", allListTask);
         }
 
-        // POST: Tasks/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Tasks == null)
-            {
-                return Problem("Entity set 'AppDbContext.Tasks'  is null.");
-            }
-            var task = await _context.Tasks.FindAsync(id);
-            if (task != null)
-            {
-                _context.Tasks.Remove(task);
-            }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool TaskExists(int id)
-        {
-            return (_context.Tasks?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }

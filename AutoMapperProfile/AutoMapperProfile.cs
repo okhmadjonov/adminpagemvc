@@ -15,6 +15,11 @@ namespace AdminPageMVC.AutoMapperProfile
             CreateMap<Course, AddCourseDto>().ReverseMap();
             CreateMap<Homework, HomeworkDTO>().ReverseMap();
             CreateMap<LessonDTO, AddLessonDto>().ReverseMap();
+            CreateMap<Result, AddResultDto>().ReverseMap();
+            CreateMap<TaskDTO, AddTaskDto>().ReverseMap();
+            CreateMap<Teacher, AddTeacherDto>().ReverseMap();
+            CreateMap<TeacherDTO, AddTeacherDto>().ReverseMap();
+            CreateMap<Test, AddTestDto>().ReverseMap();
         }
 
     }

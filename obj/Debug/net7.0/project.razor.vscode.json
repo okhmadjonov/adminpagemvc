@@ -24127,11 +24127,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\Views\\Users\\Delete.cshtml",
-      "TargetPath": "Views\\Users\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"

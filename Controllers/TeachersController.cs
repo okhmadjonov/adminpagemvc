@@ -1,49 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AdminPageMVC.Data;
+﻿using AdminPageinMVC.Repository;
+using AdminPageMVC.DTO;
 using AdminPageMVC.Entities;
+using AdminPageMVC.OnlyModelViews;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPageMVC.Controllers
 {
     public class TeachersController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly ITeacherRepository _teacherRepository;
+        private readonly IMapper _mapper;
 
-        public TeachersController(AppDbContext context)
+        public TeachersController(ITeacherRepository teacherRepository, IMapper mapper)
         {
-            _context = context;
+            _teacherRepository = teacherRepository;
+            _mapper = mapper;
+
         }
 
-        // GET: Teachers
         public async Task<IActionResult> Index()
         {
-              return _context.Teachers != null ? 
-                          View(await _context.Teachers.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Teachers'  is null.");
+            var allTeacherAsync = await _teacherRepository.GetAllTeacherAsync();
+
+            return View("Index", allTeacherAsync);
         }
 
-        // GET: Teachers/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Teachers == null)
-            {
-                return NotFound();
-            }
 
-            var teacher = await _context.Teachers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (teacher == null)
-            {
-                return NotFound();
-            }
-
-            return View(teacher);
-        }
 
         // GET: Teachers/Create
         public IActionResult Create()
@@ -51,113 +34,55 @@ namespace AdminPageMVC.Controllers
             return View();
         }
 
-        // POST: Teachers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ImageUrl,Type")] Teacher teacher)
+        public async Task<IActionResult> Create(AddTeacherDto addTeacherDto)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(teacher);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(teacher);
+            if (!ModelState.IsValid) return View("Index");
+            var teacher = _mapper.Map<Teacher>(addTeacherDto);
+            await _teacherRepository.AddTeacherAsync(teacher);
+            var allListTeachers = await _teacherRepository.GetAllTeacherAsync();
+            return View("Index", allListTeachers);
         }
 
-        // GET: Teachers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Teachers/Edit/id
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Teachers == null)
-            {
-                return NotFound();
-            }
-
-            var teacher = await _context.Teachers.FindAsync(id);
-            if (teacher == null)
-            {
-                return NotFound();
-            }
+            var teacher = await _teacherRepository.GetTeacherByIdAsync(id);
             return View(teacher);
+
         }
 
-        // POST: Teachers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        public async Task<IActionResult> GetById(int id)
+        {
+            if (!ModelState.IsValid) return View("Index");
+            var teacherByIdAsync = await _teacherRepository.GetTeacherByIdAsync(id);
+            return View("Edit", teacherByIdAsync);
+        }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImageUrl,Type")] Teacher teacher)
+        public async Task<IActionResult> Edit(int id, AddTeacherDto addTeacherDto)
         {
-            if (id != teacher.Id)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(teacher);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TeacherExists(teacher.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(teacher);
+            if (!ModelState.IsValid) return View("Index");
+            var teacher = _mapper.Map<TeacherDTO>(addTeacherDto);
+            await _teacherRepository.UpdateTeacherAsync(id, teacher);
+            var allListTeachers = await _teacherRepository.GetAllTeacherAsync();
+            return View("Index", allListTeachers);
+
         }
 
-        // GET: Teachers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        public async Task<IActionResult> DeleteTeacher() => View("Delete");
+        [HttpPost]
+        public async Task<IActionResult> DeleteTeacher(int id)
         {
-            if (id == null || _context.Teachers == null)
-            {
-                return NotFound();
-            }
-
-            var teacher = await _context.Teachers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (teacher == null)
-            {
-                return NotFound();
-            }
-
-            return View(teacher);
+            if (!ModelState.IsValid) return View("Index");
+            await _teacherRepository.DeleteTeacherAsync(id);
+            var allListTeachers = await _teacherRepository.GetAllTeacherAsync();
+            return View("Index", allListTeachers);
         }
 
-        // POST: Teachers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Teachers == null)
-            {
-                return Problem("Entity set 'AppDbContext.Teachers'  is null.");
-            }
-            var teacher = await _context.Teachers.FindAsync(id);
-            if (teacher != null)
-            {
-                _context.Teachers.Remove(teacher);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool TeacherExists(int id)
-        {
-          return (_context.Teachers?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }

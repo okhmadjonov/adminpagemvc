@@ -1,6 +1,7 @@
 ﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.DTO;
 using AdminPageMVC.Entities;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPageMVC.Controllers
@@ -11,12 +12,14 @@ namespace AdminPageMVC.Controllers
         public readonly IUserRepository UserRepository;
         private readonly IFeedbackRepository _feedbackRepository;
         private readonly IResultRepository _resultRepository;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUserRepository userRepository, IFeedbackRepository feedbackRepository, IResultRepository resultRepository)
+        public UsersController(IUserRepository userRepository, IMapper mapper, IFeedbackRepository feedbackRepository, IResultRepository resultRepository)
         {
             UserRepository = userRepository;
             _feedbackRepository = feedbackRepository;
             _resultRepository = resultRepository;
+            _mapper = mapper;
         }
 
 
@@ -28,25 +31,6 @@ namespace AdminPageMVC.Controllers
             var allUsers = await UserRepository.GetAllUsersAsync();
             return View(allUsers);
         }
-
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(int id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await UserRepository.GetUserByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
-
         public IActionResult Create()
         {
             return View();
@@ -54,7 +38,6 @@ namespace AdminPageMVC.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string FullName, string Email, string Password)
         {
             if (ModelState.IsValid)
@@ -75,17 +58,7 @@ namespace AdminPageMVC.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-
-            if (id == null || UserRepository.GetAllUsersAsync == null)
-            {
-                return NotFound();
-            }
-
             var user = await UserRepository.GetUserByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
             return View(user);
         }
 
@@ -105,36 +78,12 @@ namespace AdminPageMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await UserRepository.GetUserByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
-        }
-
-        // POST: Users/Delete/id
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (UserRepository.GetAllUsersAsync == null)
-            {
-                return Problem("Entity set 'AppDbContext.Users'  is null.");
-            }
-            if (id != null)
-            {
-                await UserRepository.DeleteUserAsync(id);
-            }
-            return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid) return View("Index");
+            await UserRepository.DeleteUserAsync(id);
+            var allUsersAsync = await UserRepository.GetAllUsersAsync();
+            return View("Index");
         }
     }
 }

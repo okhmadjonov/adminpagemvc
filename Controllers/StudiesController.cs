@@ -1,49 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.Data;
-using AdminPageMVC.Entities;
+using AdminPageMVC.OnlyModelViews;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdminPageMVC.Controllers
 {
     public class StudiesController : Controller
     {
+        private readonly IEducationRepository _educationRepository;
         private readonly AppDbContext _context;
-
-        public StudiesController(AppDbContext context)
+        private readonly IMapper _mapper;
+        public StudiesController(IEducationRepository educationRepository, AppDbContext context, IMapper mapper)
         {
+            _educationRepository = educationRepository;
             _context = context;
+            _mapper = mapper;
         }
-
         // GET: Studies
         public async Task<IActionResult> Index()
         {
-              return _context.Studies != null ? 
-                          View(await _context.Studies.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Studies'  is null.");
+            var education = await _educationRepository.GetAllEducationAsync();
+            return View(education);
         }
 
-        // GET: Studies/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Studies == null)
-            {
-                return NotFound();
-            }
-
-            var study = await _context.Studies
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (study == null)
-            {
-                return NotFound();
-            }
-
-            return View(study);
-        }
 
         // GET: Studies/Create
         public IActionResult Create()
@@ -51,113 +32,60 @@ namespace AdminPageMVC.Controllers
             return View();
         }
 
-        // POST: Studies/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Finish")] Study study)
+        public async Task<IActionResult> Create(AddEducationDto educationDto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View("_EducationPage");
+            var edu = new DTO.StudyDTO();
+            edu.Title = educationDto.Title;
+            edu.Finish = educationDto.End;
+            edu.Description = educationDto.Description;
+            var findCourse = await _context.Courses.FirstOrDefaultAsync(c => c.Id == educationDto.CourseId);
+            if (findCourse != null)
             {
-                _context.Add(study);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                edu.Course = findCourse;
             }
-            return View(study);
+
+            await _educationRepository.AddEducationAsync(edu);
+            var getEducationList = await _educationRepository.GetAllEducationAsync();
+            return View("_EducationPage", getEducationList);
         }
 
-        // GET: Studies/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Studies == null)
-            {
-                return NotFound();
-            }
 
-            var study = await _context.Studies.FindAsync(id);
-            if (study == null)
-            {
-                return NotFound();
-            }
-            return View(study);
+        public async Task<IActionResult> GetByIdEducation(int id)
+        {
+            var teacherByIdAsync = await _educationRepository.GetEducationByIdAsync(id);
+            return View("Edit", teacherByIdAsync);
         }
 
-        // POST: Studies/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Finish")] Study study)
+        public async Task<IActionResult> UpdateEducation(int id, AddEducationDto educationDto)
         {
-            if (id != study.Id)
+            if (!ModelState.IsValid) return View("_EducationPage");
+            var education = new DTO.StudyDTO();
+            education.Title = educationDto.Title;
+            education.Finish = educationDto.End;
+            education.Description = educationDto.Description;
+            var findCourse = await _context.Courses.FirstOrDefaultAsync(c => c.Id == educationDto.CourseId);
+            if (findCourse != null)
             {
-                return NotFound();
+                education.Course = findCourse;
             }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(study);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!StudyExists(study.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(study);
+            await _educationRepository.UpdateEducationAsync(id, education);
+            var allListTeachers = await _educationRepository.GetAllEducationAsync();
+            return View("Index", allListTeachers);
         }
 
-        // GET: Studies/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+
+        public async Task<IActionResult> DeleteCourse(int id)
         {
-            if (id == null || _context.Studies == null)
-            {
-                return NotFound();
-            }
-
-            var study = await _context.Studies
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (study == null)
-            {
-                return NotFound();
-            }
-
-            return View(study);
+            await _educationRepository.DeleteEducationAsync(id);
+            var allListTeachers = await _educationRepository.GetAllEducationAsync();
+            return View("Index", allListTeachers);
         }
 
-        // POST: Studies/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Studies == null)
-            {
-                return Problem("Entity set 'AppDbContext.Studies'  is null.");
-            }
-            var study = await _context.Studies.FindAsync(id);
-            if (study != null)
-            {
-                _context.Studies.Remove(study);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool StudyExists(int id)
-        {
-          return (_context.Studies?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }

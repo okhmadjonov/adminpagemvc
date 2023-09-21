@@ -1,6 +1,7 @@
 ﻿using AdminPageinMVC.Repository;
 using AdminPageMVC.Entities;
 using AdminPageMVC.OnlyModelViews;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPageMVC.Controllers
@@ -8,52 +9,32 @@ namespace AdminPageMVC.Controllers
     public class TestsController : Controller
     {
         private readonly ITestRepository _testRepository;
+        private readonly IMapper _mapper;
 
-        public TestsController(ITestRepository testRepository) => _testRepository = testRepository;
+        public TestsController(ITestRepository testRepository, IMapper mapper)
+        {
+            _testRepository = testRepository;
+            _mapper = mapper;
+        }
 
 
         // GET: Tests
         public async Task<IActionResult> Index()
         {
-            List<Test> allTests = await _testRepository.GetAll();
-            return View(allTests);
+            var allTests = await _testRepository.GetAll();
+            return View("Index", allTests);
         }
 
-        // GET: Tests/Details/5
-        public async Task<IActionResult> Details(int id)
-        {
-            if (id == null || _testRepository.GetAll() == null)
-            {
-                return NotFound();
-            }
-
-            var test = await _testRepository.GetTestById(id);
-            if (test == null)
-            {
-                return NotFound();
-            }
-
-            return View(test);
-        }
 
         // GET: Tests/Create
-        public async Task<IActionResult> Create()
-        {
-            return View();
-        }
-
+        public async Task<IActionResult> Create() { return View(); }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddTestDto addTestDto)
         {
             if (!ModelState.IsValid) return View();
 
-            Test test = new Test();
-            test.Question = addTestDto.Question;
-            test.Variants = addTestDto.Options;
-            test.RightVariant = addTestDto.RightOption;
-
+            Test test = _mapper.Map<Test>(addTestDto);
             await _testRepository.AddTestAsync(test);
             return RedirectToAction(nameof(Index));
 
@@ -62,16 +43,7 @@ namespace AdminPageMVC.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _testRepository.GetAll() == null)
-            {
-                return NotFound();
-            }
-
             var test = await _testRepository.GetTestById(id);
-            if (test == null)
-            {
-                return NotFound();
-            }
             return View(test);
         }
 
@@ -80,12 +52,8 @@ namespace AdminPageMVC.Controllers
         public async Task<IActionResult> Edit(int id, AddTestDto addTestDto)
         {
 
-            Test test = new Test();
-            test.Question = addTestDto.Question;
-            test.Variants = addTestDto.Options;
-            test.RightVariant = addTestDto.RightOption;
+            Test test = _mapper.Map<Test>(addTestDto);
             await _testRepository.UpdateTest(test);
-
             await _testRepository.AddTestAsync(test);
             var alltest = _testRepository.GetAll();
             return RedirectToAction(nameof(Index));
@@ -93,34 +61,11 @@ namespace AdminPageMVC.Controllers
         }
 
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteTest(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var test = await _testRepository.GetTestById(id);
-            if (test == null)
-            {
-                return NotFound();
-            }
-            return View(test);
-        }
-
-        // POST: Tests/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_testRepository.GetAll == null)
-            {
-                return Problem("Entity set 'AppDbContext.Tests'  is null.");
-            }
-            if (id != null)
-            {
-                await _testRepository.DeleteTestAsync(id);
-            }
-            return RedirectToAction(nameof(Index));
+            await _testRepository.DeleteTestAsync(id);
+            var allListTest = await _testRepository.GetAll();
+            return View("Index", allListTest);
         }
     }
 }

@@ -32,15 +32,7 @@ namespace AdminPageMVC.Controllers
         // GET: Lessons/Create
         public async Task<IActionResult> Create(AddLessonDto addLessonDto)
         {
-            //if (string.IsNullOrWhiteSpace(addLessonDto.Title) || string.IsNullOrWhiteSpace(addLessonDto.VideoUrl) || string.IsNullOrWhiteSpace(addLessonDto.Information))
-            //{
-            //    ModelState.AddModelError("", "All fields must be filled");
-            //    return View("Index");
-            //}
-            //var lesson = new LessonDTO();
-            //lesson.Title = addLessonDto.Title;
-            //lesson.VideoUrl = addLessonDto.VideoUrl;
-            //lesson.Information = addLessonDto.Information;
+
             var lesson = _mapper.Map<LessonDTO>(addLessonDto);
             var findCourse = await _context.Courses.FirstOrDefaultAsync(c => c.Id == addLessonDto.CourseId);
             if (findCourse != null) lesson.Course = findCourse;
@@ -68,10 +60,7 @@ namespace AdminPageMVC.Controllers
         public async Task<IActionResult> Edit(int id, AddLessonDto addLessonDto)
         {
             if (!ModelState.IsValid) return View("Index");
-            var lesson = new LessonDTO();
-            lesson.Title = addLessonDto.Title;
-            lesson.VideoUrl = addLessonDto.VideoUrl;
-            lesson.Information = addLessonDto.Information;
+            var lesson = _mapper.Map<LessonDTO>(addLessonDto);
             var findCourse = await _context.Courses.FirstOrDefaultAsync(c => c.Id == addLessonDto.CourseId);
             if (findCourse != null)
             {

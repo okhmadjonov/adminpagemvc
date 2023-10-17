@@ -382,3 +382,7 @@ C:\Users\pc\Desktop\fulls\AdminPageMVC\bin\Debug\net7.0\Mvc.Grid.Core.dll
 C:\Users\pc\Desktop\fulls\AdminPageMVC\bin\Debug\net7.0\refs\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\pc\Desktop\fulls\AdminPageMVC\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\pc\Desktop\fulls\AdminPageMVC\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\pc\Desktop\fulls\AdminPageMVC\bin\Debug\net7.0\refs\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\pc\Desktop\fulls\AdminPageMVC\bin\Debug\net7.0\refs\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\pc\Desktop\fulls\AdminPageMVC\bin\Debug\net7.0\refs\Microsoft.Extensions.Identity.Core.dll
+C:\Users\pc\Desktop\fulls\AdminPageMVC\bin\Debug\net7.0\refs\Microsoft.Extensions.Identity.Stores.dll

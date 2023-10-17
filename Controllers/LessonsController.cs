@@ -61,11 +61,11 @@ namespace AdminPageMVC.Controllers
         {
             if (!ModelState.IsValid) return View("Index");
             var lesson = _mapper.Map<LessonDTO>(addLessonDto);
-            var findCourse = await _context.Courses.FirstOrDefaultAsync(c => c.Id == addLessonDto.CourseId);
-            if (findCourse != null)
-            {
-                lesson.Course = findCourse;
-            }
+            //var findCourse = await _context.Courses.FirstOrDefaultAsync(c => c.Id == addLessonDto.CourseId);
+            //if (findCourse != null)
+            //{
+            //    lesson.Course = findCourse;
+            //}
             await _lessonRepository.UpdateLessonAsync(id, lesson);
             var allListLesson = await _lessonRepository.GetAllLessonAsync();
             return RedirectToAction(nameof(Index));

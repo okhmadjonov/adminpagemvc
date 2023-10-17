@@ -6,7 +6,7 @@ using Task = AdminPageMVC.Entities.Task;
 namespace AdminPageMVC.Data;
 
 
-public class AppDbContext : IdentityDbContext
+public class AppDbContext : IdentityDbContext<ApplicationUser>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -27,6 +27,7 @@ public class AppDbContext : IdentityDbContext
     public DbSet<Homework> Homeworks { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<Contact> Contacts { get; set; }
+
 
 }
 

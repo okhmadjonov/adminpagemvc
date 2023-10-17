@@ -57,6 +57,14 @@
       "PackagePath": "staticwebassets\\assets\\img\\log.jpg"
     },
     {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\maxresdefault.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\maxresdefault.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\orig.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\orig.jpg"
+    },
+    {
       "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\patients\\1.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\patients\\1.jpg"
     },
@@ -75,6 +83,14 @@
     {
       "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\user.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\user.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\wd.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\wd.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\assets\\img\\world.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\world.jpg"
     },
     {
       "Id": "C:\\Users\\pc\\Desktop\\fulls\\AdminPageMVC\\wwwroot\\css\\mvc-grid\\mvc-grid.css",
